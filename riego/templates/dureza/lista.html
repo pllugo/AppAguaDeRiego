@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Dureza List</title>
+        {% load static %}
+
+        <link rel="stylesheet" type="text/css" href="{% static 'calculo_agua/css/estilo-pocp.css' %}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+       
+    </head>
+    <body>
+        <header>
+            <div class="topnav">
+              <a class="active" href="{% url 'inicio' %}">Home</a>
+              
+              <a href="#about">About</a>
+            </div>
+          </header>
+
+
+        <br>
+        <h2 style="text-align: center;">Hardness of water (mg/L-CaCO3)</h2>
+
+
+        <div class="container">
+            <table class="table" style="text-align: center;">
+                <thead class="table-dark">
+                    <tr>
+                        
+                        <th scope="col">Sample</th>
+                        <th scope="col">Ca+2 (mg/L)</th>
+                        <th scope="col">Mg+2 (mg/L)</th>
+                        <th scope="col">HCO-3 (mg/L)</th>
+                        <th scope="col">CO3= (mg/L)</th>
+                        <th scope="col">Carbonaceous hardness (mg/L-CaCO3)</th>
+                        <th scope="col">Non-Carbon Hardness (mg/L-CaCO3)</th>
+                        <th scope="col">Total Alkalinity (mg/L-CaCO3)</th>
+                        <th scope="col">Total hardness (mg/L-CaCO3)</th>
+                        <th scope="col">Rangos de Dureza<button type="button" class="btn btn-success" data-bs-trigger="hover focus" data-bs-toggle="popover" title="Water classification (ppm-CaCO3)" data-bs-content="Green: Blend (0-17) <br><br> Green-Yellow: Slightly hard (17-60)<br><br>Yellow: Moderately hard (60-120)<br><br> Orange: Hard (120-180)<br><br> Red: Very hard (> 180)<br>" data-bs-html="true" >?</button></th>
+                        <th scope="col">Action</th>
+
+                    </tr>
+
+                </thead>
+                <tbody>
+                    {% for listadoDureza in listadoDurezas %}
+                    <tr>
+                        
+                        <th>{{ listadoDureza.nombre }}</th>
+                        <th>{{ listadoDureza.calcio }}</th>
+                        <td>{{ listadoDureza.magnesio }}</td>
+                        <td>{{ listadoDureza.bicarbonato }}</td>
+                        <td>{{ listadoDureza.carbonato }}</td>
+                        <th>{{ listadoDureza.durezaCarbonacea }}</th>
+                        <th>{{ listadoDureza.durezaNoCarbonacea }}</th>
+                        <th>{{ listadoDureza.alcalinidadTotal }}</th>
+                        <th>{{ listadoDureza.durezaTotal }}</th>
+                        <td>
+                            {% if listadoDureza.durezaTotal > 0 and listadoDureza.durezaTotal < 17 %} 
+                            <i class="fa fa-circle text-success"></i>
+                            {% endif %}
+                            {% if listadoDureza.durezaTotal > 17 and listadoDureza.durezaTotal < 60 %} 
+                            <i class="fa fa-circle" style="color: rgb(187, 255, 0);"></i>
+                            {% endif %}
+                            {% if listadoDureza.durezaTotal > 60 and listadoDureza.durezaTotal < 120 %} 
+                            <i class="fa fa-circle" style="color: rgb(255,255,0);"></i>
+                            {% endif %}
+                            {% if listadoDureza.durezaTotal > 120 and listadoDureza.durezaTotal < 180 %} 
+                            <i class="fa fa-circle" style="color:orange;"></i>
+                            {% endif %}
+                            {% if listadoDureza.durezaTotal > 180 %} 
+                            <i class="fa fa-circle" style="color:red;"></i>
+                            {% endif %}
+                            
+                        </td>
+                        <td>
+                            <a href="{% url 'edicionDureza' listadoDureza.id %}" class="btn btn-warning">Modify</a>
+                           
+                            <a href="{% url 'eliminarDureza' listadoDureza.id %}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div class="d-grid gap-2 col-3 mx-auto">
+            <a href="{% url 'inicio' %}" class="btn btn-success">Back</a>
+
+        </div>
+       
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <script>
+            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+            })
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,278 @@
+{% extends "base.html" %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'calculo_agua/css/estilo-pocp.css' %}">
+    <title>Water App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+
+<body>
+    <header>
+        <div class="topnav">
+          <a class="active" href="{% url 'inicio' %}">Home</a>
+          <a href="{% url 'nosotros' %}">About</a>
+        </div>
+      </header>
+
+    {% block contenido %}
+    <main class="container">
+        <!--text-bg-dark -->
+        
+
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <div
+                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-success">Design</strong>
+                        <h3 class="mb-0">Characterization</h3>
+                        <div class="mb-1 text-muted">Quality Parameters</div>
+                        <p class="mb-auto">Know the parameters of irrigation water quality.</p>
+                        
+                        <a href="{% url 'crearAgua' %}" class="btn btn-success">Calculate</a>
+                        <br>
+                        <a href="{% url 'listaAgua' %}" class="btn btn-success">List</a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <img src="{% static 'calculo_agua/img/riego.png' %}" class="img-fluid rounded-start" alt="..." width="275" height="250">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div
+                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-success">Design</strong>
+                        <h3 class="mb-0">SAR</h3>
+                        <div class="mb-1 text-muted">Sodium Adsorption Ratio</div>
+                        <p class="mb-auto">To anticipate the degradation that a certain irrigation water can cause, the S.A.R index is calculated.</p>
+                        
+                        <a href="{% url 'crearSar' %}" class="btn btn-success">Calculate</a>
+                        <br>
+                        <a href="{% url 'listaSar' %}" class="btn btn-success">List</a>
+                        <br>
+                        <a href="{% url 'displaySar' %}" class="btn btn-secondary">Graphic</a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <img src="{% static 'calculo_agua/img/calculoSar.png' %}" class="img-fluid rounded-start" alt="..." width="275" height="250">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div
+                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-success">Design</strong>
+                        <h3 class="mb-0">Water Alkalinity</h3>
+                        <div class="mb-1 text-muted">Buffer Capacity</div>
+                        <p class="mb-auto">This parameter must be constantly evaluated, it can limit the availability of some nutrients.</p>
+                        <br>
+                        <a href="{% url 'crearAlcalinidad' %}" class="btn btn-success">Calculate</a>
+                        <br>
+                        <a href="{% url 'listaAlcalinidad' %}" class="btn btn-success">List</a>
+                        <br>
+                        <a href="{% url 'displayAlcalinidad' %}" class="btn btn-secondary">Graphic</a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <img src="{% static 'calculo_agua/img/alcalinidad.png' %}" class="img-fluid rounded-start" alt="..." width="275" height="250">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div
+                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-success">Design</strong>
+                        <h3 class="mb-0">Hardness of water</h3>
+                        <div class="mb-1 text-muted">Ca+2 + Mg+2</div>
+                        <p class="mb-auto">Hard water can be used for agricultural irrigation with the correct agronomic management of it.</p>
+                        <br>
+                            <a href="{% url 'crearDureza' %}" class="btn btn-success">Calculate</a>
+                            <br>
+                            <a href="{% url 'listaDureza' %}" class="btn btn-success">List</a>
+                            <br>
+                            <a href="{% url 'displayDureza' %}" class="btn btn-secondary">Graphic</a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <img src="{% static 'calculo_agua/img/dureza.png' %}" class="img-fluid rounded-start" alt="..." width="275" height="250">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-md-8">
+                <h3 class="pb-4 mb-4 fst-italic border-bottom">
+                    Interesting articles
+                </h3>
+
+                <article class="blog-post">
+                    <h2 class="blog-post-title mb-1">Monitoring water use in agriculture through satellite remote sensing</h2>
+                    <p class="blog-post-meta">2021 <a href="#">Mark</a></p>
+
+                    <p>In 2050, food needs to be produced for an expected population of between 9 and 10 billion people. A lot of water is needed to produce food.</p>
+                    <hr>
+                    <a href="https://www.globalcause.co.uk/water/monitoring-water-use-in-agriculture-through-satellite-remote-sensing/#utm_source=FAO-distro&utm_medium=cliente"> Read the whole article in "The Future of Water 2021"</a>
+                    <br>
+                    <h2>The role of women in agricultural water management - Phase 2. Mainstreaming gender in data on agricultural water management</h2>
+                    
+                    <p>This paper presents the results of a follow-up project in Algeria and Tunisia on the development of gender-sensitive indicators related to the role of women in agricultural water management. The paper summarizes the results of the "Phase 1" project, then presents the results of two studies conducted in Algeria and Tunisia on institutional level actors dealing with agricultural water management and national-level sex-disaggregated data. Most importantly, the paper reflects on the efforts to mainstream gender in statistics relative to agricultural water management, the limitations in collecting this data and finally offers various recommendations to reduce the gaps related to gender in water statistics.</p>
+                    
+                    <a href="https://www.fao.org/3/i5680f/i5680f.pdf">Read the whole article</a>
+                   
+                </article>
+                <br>
+                
+                <article class="blog-post">
+                    <h3>Irrigation water quality parameters for agricultural use</h3>
+                    <p>(Nakayama, 1982; Ayers y Wescot, 1985)</p>
+                    <table class="table" style="text-align: center;">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Parameters</th>
+                                <th>Units</th>
+                                <th>None</th>
+                                <th>Mild to Moderate</th>
+                                <th>Severe</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Electric conductivity (CE)</td>
+                                <td>dS/m</td>
+                                <td>< 0.7</td>
+                                <td>0.7 - 3.0</td>
+                                <td>> 3.0</td>
+                            </tr>
+                            <tr>
+                                <td>Total dissolved solids (TDS)</td>
+                                <td>mg/L</td>
+                                <td>< 450 </td>
+                                <td>450 - 2000 </td>
+                                <td>> 2000 </td>
+                            </tr>
+                            <tr>
+                                <td>Sodium Adsorption Ratio (SAR)</td>
+                                <td>-</td>
+                                <td>< 3 </td>
+                                <td>5 - 10 </td>
+                                <td>> 10 </td>
+                            </tr>
+                            <tr>
+                                <td>Sodium (Na+)</td>
+                                <td>meq/L</td>
+                                <td>< 5 </td>
+                                <td>3 - 9 </td>
+                                <td>> 9 </td>
+                            </tr>
+                            <tr>
+                                <td>Bicarbonate (HCO3-)</td>
+                                <td>meq/L</td>
+                                <td>< 1.5 </td>
+                                <td>1.5 - 8.5 </td>
+                                <td>> 8.5 </td>
+                            </tr>
+                            <tr>
+                                <td>chloride (Cl-)</td>
+                                <td>meq/L</td>
+                                <td>< 4 </td>
+                                <td>4 - 10 </td>
+                                <td>> 10 </td>
+                            </tr>
+                            <tr>
+                                <td>Boro (B3+)</td>
+                                <td>mg/L</td>
+                                <td>< 0.7 </td>
+                                <td>0.7 - 3.0 </td>
+                                <td>> 3 </td>
+                            </tr>
+                            <tr>
+                                <td>Manganese (Mn2+)</td>
+                                <td>mg/L</td>
+                                <td>< 0.1 </td>
+                                <td>0.1 - 1.5 </td>
+                                <td>> 1.5 </td>
+                            </tr>
+                            <tr>
+                                <td>Iron (Fe2+)</td>
+                                <td>mg/L</td>
+                                <td>< 0.1 </td>
+                                <td>0.1 - 1.5 </td>
+                                <td>> 1.5 </td>
+                            </tr>
+                            <tr>
+                                <td>Hydrogen sulfide (H2S)</td>
+                                <td>mg/L</td>
+                                <td>< 0.5 </td>
+                                <td>0.1 - 1.5 </td>
+                                <td>> 1.5 </td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+
+                </article>
+
+                
+            </div>
+
+            <div class="col-md-4">
+                <div class="position-sticky" style="top: 2rem;">
+                    <div class="p-4 mb-3 bg-light rounded">
+                        <h4 class="fst-italic">About</h4>
+                        <p class="mb-0">This is a blog-app that allows us to calculate water quality parameters for agricultural use.</p>
+                        <p>Phd. Student Pedro Lugo</p>
+                    </div>
+
+                    <div class="p-4">
+                        <h4 class="fst-italic">Deployed Applications</h4>
+                        <ol class="list-unstyled mb-0">
+                            <li><a href="https://django-simulador-atmos.onrender.com">Atmospheric Simulator App</a></li>
+                            
+                        </ol>
+                    </div>
+
+                    <div class="p-4">
+                        <h4 class="fst-italic">Elsewhere</h4>
+                        <ol class="list-unstyled">
+                            <li><a href="https://www.linkedin.com/in/pedro-luis-lugo-garcia-068b5657/">linkedin</a></li>
+                            
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <div id="conten">
+            {% if messages %}
+              {% for m in messages %}
+                {% if m.tags == 'success' %}
+                <script>
+                  Swal.fire({
+                    title: 'Congratulations!!',
+                    text: '{{m}}',
+                    icon: 'success',
+                  })
+                </script>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+        </div>
+    
+        {% endblock %}
+</body>
+
+</html>

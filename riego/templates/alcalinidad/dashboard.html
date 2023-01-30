@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Water App</title>
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'calculo_agua/css/estilo-pocp.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+
+<body>
+  <header>
+    <div class="topnav">
+      <a class="active" href="{% url 'inicio' %}">Home</a>
+      
+      <a href="{% url 'nosotros' %}">About</a>
+    </div>
+  </header>
+    <div class="container">
+        <header>Alkalinity Statistics (mg/L-CaCO3)</header>
+        <form action="">
+            <div class="form-first">
+                <div class="details-compound">
+                    
+                  <div class="chart">
+                    <div id="chart"></div>
+                </div>
+
+                </div>
+                
+                
+
+            </div>
+            <div class="form-first">
+              <div class="details-compound">
+                  
+                <div class="chart">
+                  <div id="chart2"></div>
+              </div>
+
+              </div>
+              
+              
+
+          </div>
+            <br>
+
+            <div class="d-grid gap-2 col-3 mx-auto">
+              <a href="{% url 'inicio' %}" class="btn btn-success">Back</a>
+  
+          </div>
+            
+
+        </form>
+    </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+        integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
+          var df3 = {{df3|safe}};
+          var df2 = {{df2|safe}};
+          var listaRangoAlto = {{listaRangoAlto|safe}};
+          var listaRangoBajo = {{listaRangoBajo|safe}};
+          var options = {
+          series: [{
+            name: "Acceptable minimum",
+            data: listaRangoBajo
+          },
+          {
+            name: "High Alkalinity",
+            data: listaRangoAlto
+          },
+          {
+            name: 'Results Total Alkalinity (mg/L-CaCO3)',
+            data: df2
+          }
+        ],
+          chart: {
+          height: 350,
+          type: 'line',
+          zoom: {
+            enabled: false
+          },
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          width: [5, 7, 5],
+          curve: 'straight',
+          dashArray: [0, 8, 5]
+        },
+        title: {
+          text: 'Total Alkalinity',
+          align: 'left'
+        },
+        legend: {
+          tooltipHoverFormatter: function(val, opts) {
+            return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
+          }
+        },
+        markers: {
+          size: 0,
+          hover: {
+            sizeOffset: 6
+          }
+        },
+        xaxis: {
+          categories: df3,
+        },
+        tooltip: {
+          y: [
+            {
+              title: {
+                formatter: function (val) {
+                  return val + " (mg/L-CaCO3)"
+                }
+              }
+            },
+            {
+              title: {
+                formatter: function (val) {
+                  return val + " (mg/L-CaCO3)"
+                }
+              }
+            },
+            {
+              title: {
+                formatter: function (val) {
+                  return val;
+                }
+              }
+            }
+          ]
+        },
+        grid: {
+          borderColor: '#f1f1f1',
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+        </script>
+
+        <script>
+          var df4 = {{df4|safe}};
+              var options = {
+            series: [{
+              name: "mg/L-CaCO3",
+              data: df4
+          }],
+            chart: {
+            height: 350,
+            type: 'line',
+            zoom: {
+              enabled: false
+            }
+          },
+          dataLabels: {
+            enabled: false
+          },
+          stroke: {
+            curve: 'straight'
+          },
+          title: {
+            text: 'Alkalinity by HCO3-',
+            align: 'left'
+          },
+          grid: {
+            row: {
+              colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+              opacity: 0.5
+            },
+          },
+          xaxis: {
+            categories: df3,
+          }
+          };
+
+          var chart = new ApexCharts(document.querySelector("#chart2"), options);
+          chart.render();
+        </script>
+</body>
+
+</html>
